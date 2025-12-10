@@ -23,9 +23,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".BookingConfirmationActivity"
+            android:exported="false"
+            android:label="Booking Confirmation" />
+        <activity
             android:name=".ServiceListActivity"
             android:exported="false"
             android:label="Select a Service" />
+        <activity
+            android:name=".BookingListActivity"
+            android:exported="false"
+            android:label="My Bookings" />
     </application>
 
 </manifest>

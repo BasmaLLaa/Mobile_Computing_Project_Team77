@@ -1,9 +1,10 @@
 package com.example.salon
-import android.content.Intent
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -12,6 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,24 +28,27 @@ class MainActivity : ComponentActivity() {
                     val intent = Intent(this, ServiceListActivity::class.java)
                     startActivity(intent)
                 },
+                onViewBookingsClick = {
+                    val intent = Intent(this, BookingListActivity::class.java)
+                    startActivity(intent)
+                },
                 onContactClick = {
-                    // TODO later
+                    // TODO: add contact screen later
                 }
             )
         }
     }
 }
 
-
 @Composable
 fun HomeScreen(
     onBookClick: () -> Unit,
+    onViewBookingsClick: () -> Unit,
     onContactClick: () -> Unit
 ) {
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Background Gradient
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -57,7 +63,18 @@ fun HomeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                // Welcome Card
+                // ⭐ NEW: Added illustration image
+                Image(
+                    painter = painterResource(id = R.drawable.beauty_salon_amico),
+                    contentDescription = "Salon Illustration",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp)
+                        .padding(bottom = 24.dp),
+                    contentScale = ContentScale.Fit
+                )
+
+                // Welcome card
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     shadowElevation = 8.dp,
@@ -84,9 +101,8 @@ fun HomeScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(50.dp))
+                Spacer(modifier = Modifier.height(40.dp))
 
-                // Book Button
                 Button(
                     onClick = onBookClick,
                     modifier = Modifier.fillMaxWidth()
@@ -94,9 +110,17 @@ fun HomeScreen(
                     Text(text = "Book Appointment", fontSize = 18.sp)
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-                // Contact Button
+                Button(
+                    onClick = onViewBookingsClick,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "My Bookings", fontSize = 18.sp)
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Button(
                     onClick = onContactClick,
                     modifier = Modifier.fillMaxWidth()
