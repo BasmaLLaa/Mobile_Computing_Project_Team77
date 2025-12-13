@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -11,29 +10,47 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Salon">
+
+        <!-- 🚀 Main launcher for the salon app -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Salon">
+
+            <!-- Launch icon -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- 🌟 Deep link so Flutter can return back to this app -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="salonapp"
+                    android:host="home" />
+            </intent-filter>
+
         </activity>
+
         <activity
             android:name=".BookingConfirmationActivity"
             android:exported="false"
             android:label="Booking Confirmation" />
+
         <activity
             android:name=".ServiceListActivity"
             android:exported="false"
             android:label="Select a Service" />
+
         <activity
             android:name=".BookingListActivity"
             android:exported="false"
             android:label="My Bookings" />
+
     </application>
 
 </manifest>
