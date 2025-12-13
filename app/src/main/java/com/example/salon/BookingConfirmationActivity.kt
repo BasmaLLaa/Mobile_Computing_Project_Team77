@@ -28,7 +28,6 @@ class BookingConfirmationActivity : ComponentActivity() {
                 serviceName = serviceName,
                 date = date,
                 time = time,
-                onContactClick = { openDialer() },
                 onLocationClick = { openMaps() },
                 onBackHomeClick = { goHome() },
                 onBack = { finish() }
@@ -36,23 +35,13 @@ class BookingConfirmationActivity : ComponentActivity() {
         }
     }
 
-    private fun openDialer() {
-        val phoneNumber = "0123456789" // change to your real number
-        val intent = Intent(Intent.ACTION_DIAL).apply {
-            data = Uri.parse("tel:$phoneNumber")
-        }
-        startActivity(intent)
-    }
-
     private fun openMaps() {
-        // simple version: search in any maps app that can handle geo:
         val latitude = 30.0444
         val longitude = 31.2357
         val label = "My Salon"
 
         val uri = Uri.parse("geo:$latitude,$longitude?q=$latitude,$longitude($label)")
         val intent = Intent(Intent.ACTION_VIEW, uri)
-        // IMPORTANT: no setPackage() here, so it won't crash if Google Maps not installed
         startActivity(intent)
     }
 
@@ -70,7 +59,6 @@ fun BookingConfirmationScreen(
     serviceName: String,
     date: String,
     time: String,
-    onContactClick: () -> Unit,
     onLocationClick: () -> Unit,
     onBackHomeClick: () -> Unit,
     onBack: () -> Unit
@@ -112,13 +100,6 @@ fun BookingConfirmationScreen(
                     Text(text = "Date: $date")
                     Text(text = "Time: $time")
                 }
-            }
-
-            Button(
-                onClick = onContactClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Contact Us")
             }
 
             Button(
