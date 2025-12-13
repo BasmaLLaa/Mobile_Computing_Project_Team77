@@ -1,4 +1,5 @@
 package com.example.salon
+import android.net.Uri
 
 import android.content.Intent
 import android.os.Bundle
@@ -33,8 +34,12 @@ class MainActivity : ComponentActivity() {
                     startActivity(intent)
                 },
                 onContactClick = {
-                    // TODO: add contact screen later
+                    // 🔗 Open Flutter contact app via deep link
+                    val uri = Uri.parse("flutterapp://contact?msg=fromSalon")
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    startActivity(intent)
                 }
+
             )
         }
     }
@@ -63,7 +68,6 @@ fun HomeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                // ⭐ NEW: Added illustration image
                 Image(
                     painter = painterResource(id = R.drawable.beauty_salon_amico),
                     contentDescription = "Salon Illustration",
@@ -74,7 +78,6 @@ fun HomeScreen(
                     contentScale = ContentScale.Fit
                 )
 
-                // Welcome card
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     shadowElevation = 8.dp,
@@ -88,15 +91,13 @@ fun HomeScreen(
                         Text(
                             text = "Welcome to",
                             fontSize = 24.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            fontWeight = FontWeight.Medium
                         )
 
                         Text(
                             text = "My Salon",
                             fontSize = 40.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
