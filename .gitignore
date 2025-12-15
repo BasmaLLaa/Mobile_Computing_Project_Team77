@@ -74,3 +74,8 @@ android/app/release/
 ####################################
 app.*.symbols
 app.*.map.json
+# Flutter Windows ephemeral / build outputs
+**/windows/flutter/ephemeral/
+**/*.pdb
+**/*.dll
+**/*.exe
